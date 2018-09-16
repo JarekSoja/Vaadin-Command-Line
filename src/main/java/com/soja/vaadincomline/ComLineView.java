@@ -15,12 +15,13 @@ public class ComLineView extends VerticalLayout implements View {
 
     @PostConstruct
     void init() {
-        ComLineConnection c = new ComLineConnection();
         try {
-            Process p = c.createConnection();
+            Process p = ComLineConnection.createConnection();
             int exitValue = p.waitFor();
             System.out.println("\n\nExit Value is " + exitValue);
-        } catch (Exception e) {
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
             e.printStackTrace();
         }
     }
